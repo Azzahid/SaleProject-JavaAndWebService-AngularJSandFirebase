@@ -1,0 +1,92 @@
+.product {
+	margin: 30px 0px;
+	position:relative;
+	overflow: hidden;
+}
+
+.product-date {
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.product-time {
+	font-size: 11pt;
+}
+
+.product img {
+	border-style: solid;
+	border-color: grey;
+	float: left;
+	border-width: 1px;
+	margin-left: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+.product-center-description {
+	float: left;
+	width: 300px;
+}
+
+.product-name {
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+.product-price {
+	font-size: 11pt;	
+}
+
+.product-desc {
+	font-size: 10pt;
+}
+
+.product-bottom-desc {
+	font-size: 9pt;
+	position: absolute; 
+	bottom: 0;
+	padding-bottom: 10px;
+}
+
+.product-right-description {
+	float:right;
+	width: 250px;
+}
+
+.full {
+	clear: left;
+}
+
+
+
+.margin-top {
+	margin-top: 20px;
+}
+
+.edit, .delete {
+	text-decoration: none;	
+	font-weight: bold;
+	cursor:pointer;
+}
+
+.edit {
+	color: #eea12d;		/*orange*/
+	margin-right: 30px;
+}
+
+.delete {
+	color: #870005;		/*red*/
+}
+
+.like {
+	font-size: 12pt;
+	text-decoration: none;		
+	background:none!important;
+	border:none; 
+	padding:0!important;
+	/*border is optional*/
+	cursor: pointer;
+	margin-right: 30px;
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://marketplace.com/" xmlns:tns="http://marketplace.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getAllProduct" type="tns:getAllProduct"/>
+
+  <xs:element name="getAllProductResponse" type="tns:getAllProductResponse"/>
+
+  <xs:element name="getLike" type="tns:getLike"/>
+
+  <xs:element name="getLikeResponse" type="tns:getLikeResponse"/>
+
+  <xs:element name="getLikeStatus" type="tns:getLikeStatus"/>
+
+  <xs:element name="getLikeStatusResponse" type="tns:getLikeStatusResponse"/>
+
+  <xs:element name="getTotalPurchase" type="tns:getTotalPurchase"/>
+
+  <xs:element name="getTotalPurchaseResponse" type="tns:getTotalPurchaseResponse"/>
+
+  <xs:element name="hello" type="tns:hello"/>
+
+  <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+  <xs:element name="searchProduct" type="tns:searchProduct"/>
+
+  <xs:element name="searchProductResponse" type="tns:searchProductResponse"/>
+
+  <xs:complexType name="searchProduct">
+    <xs:sequence>
+      <xs:element name="text" type="xs:string" minOccurs="0"/>
+      <xs:element name="option" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchProductResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:product" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="product">
+    <xs:sequence>
+      <xs:element name="createdAt" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageName" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageType" type="xs:string" minOccurs="0"/>
+      <xs:element name="namaProduk" type="xs:string" minOccurs="0"/>
+      <xs:element name="PId" type="xs:int" minOccurs="0"/>
+      <xs:element name="photoUrl" type="xs:base64Binary" minOccurs="0"/>
+      <xs:element name="price" type="xs:string" minOccurs="0"/>
+      <xs:element name="userId" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTotalPurchase">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTotalPurchaseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAllProduct">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllProductResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:product" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLikeStatus">
+    <xs:sequence>
+      <xs:element name="productid" type="xs:int"/>
+      <xs:element name="userid" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLikeStatusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLike">
+    <xs:sequence>
+      <xs:element name="productid" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLikeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

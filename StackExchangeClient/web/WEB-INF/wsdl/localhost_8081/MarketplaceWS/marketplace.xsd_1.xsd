@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://marketplace.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://marketplace.com/">
+
+<xs:element name="addProduct" type="tns:addProduct"/>
+
+<xs:element name="addProductResponse" type="tns:addProductResponse"/>
+
+<xs:element name="changeLikeStatus" type="tns:changeLikeStatus"/>
+
+<xs:element name="changeLikeStatusResponse" type="tns:changeLikeStatusResponse"/>
+
+<xs:element name="confirmPurchase" type="tns:confirmPurchase"/>
+
+<xs:element name="confirmPurchaseResponse" type="tns:confirmPurchaseResponse"/>
+
+<xs:element name="deleteProduct" type="tns:deleteProduct"/>
+
+<xs:element name="deleteProductResponse" type="tns:deleteProductResponse"/>
+
+<xs:element name="editProduct" type="tns:editProduct"/>
+
+<xs:element name="editProductResponse" type="tns:editProductResponse"/>
+
+<xs:element name="getAllProduct" type="tns:getAllProduct"/>
+
+<xs:element name="getAllProductResponse" type="tns:getAllProductResponse"/>
+
+<xs:element name="getLike" type="tns:getLike"/>
+
+<xs:element name="getLikeResponse" type="tns:getLikeResponse"/>
+
+<xs:element name="getLikeStatus" type="tns:getLikeStatus"/>
+
+<xs:element name="getLikeStatusResponse" type="tns:getLikeStatusResponse"/>
+
+<xs:element name="getPhoto" type="tns:getPhoto"/>
+
+<xs:element name="getPhotoPurchase" type="tns:getPhotoPurchase"/>
+
+<xs:element name="getPhotoPurchaseResponse" type="tns:getPhotoPurchaseResponse"/>
+
+<xs:element name="getPhotoResponse" type="tns:getPhotoResponse"/>
+
+<xs:element name="getProductPurchase" type="tns:getProductPurchase"/>
+
+<xs:element name="getProductPurchaseResponse" type="tns:getProductPurchaseResponse"/>
+
+<xs:element name="getProductSales" type="tns:getProductSales"/>
+
+<xs:element name="getProductSalesResponse" type="tns:getProductSalesResponse"/>
+
+<xs:element name="getTotalPurchase" type="tns:getTotalPurchase"/>
+
+<xs:element name="getTotalPurchaseResponse" type="tns:getTotalPurchaseResponse"/>
+
+<xs:element name="getYourProduct" type="tns:getYourProduct"/>
+
+<xs:element name="getYourProductResponse" type="tns:getYourProductResponse"/>
+
+<xs:element name="hello" type="tns:hello"/>
+
+<xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="insertLike" type="tns:insertLike"/>
+
+<xs:element name="insertLikeResponse" type="tns:insertLikeResponse"/>
+
+<xs:element name="product" type="tns:product"/>
+
+<xs:element name="purchase" type="tns:purchase"/>
+
+<xs:element name="searchProduct" type="tns:searchProduct"/>
+
+<xs:element name="searchProductResponse" type="tns:searchProductResponse"/>
+
+<xs:complexType name="confirmPurchase">
+<xs:sequence>
+<xs:element name="buyer_id" type="xs:int"/>
+<xs:element name="product_id" type="xs:int"/>
+<xs:element name="consignee" type="xs:string" minOccurs="0"/>
+<xs:element name="fulladdress" type="xs:string" minOccurs="0"/>
+<xs:element name="quantity" type="xs:int"/>
+<xs:element name="creditcardnumber" type="xs:string" minOccurs="0"/>
+<xs:element name="postalcode" type="xs:string" minOccurs="0"/>
+<xs:element name="phonenumber" type="xs:string" minOccurs="0"/>
+<xs:element name="card_verification" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="confirmPurchaseResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertLike">
+<xs:sequence>
+<xs:element name="barangid" type="xs:int"/>
+<xs:element name="userid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertLikeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeLikeStatus">
+<xs:sequence>
+<xs:element name="barangid" type="xs:int"/>
+<xs:element name="userid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeLikeStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchProduct">
+<xs:sequence>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+<xs:element name="option" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchProductResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="createdAt" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="imageName" type="xs:string" minOccurs="0"/>
+<xs:element name="imageType" type="xs:string" minOccurs="0"/>
+<xs:element name="namaProduk" type="xs:string" minOccurs="0"/>
+<xs:element name="PId" type="xs:int" minOccurs="0"/>
+<xs:element name="photoUrl" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="price" type="xs:string" minOccurs="0"/>
+<xs:element name="userId" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPhotoPurchase">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPhotoPurchaseResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:purchase" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="purchase">
+<xs:sequence>
+<xs:element name="buyerId" type="xs:int" minOccurs="0"/>
+<xs:element name="cardVerification" type="xs:string" minOccurs="0"/>
+<xs:element name="consignee" type="xs:string" minOccurs="0"/>
+<xs:element name="createdAt" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="creditcardnumber" type="xs:string" minOccurs="0"/>
+<xs:element name="fulladdress" type="xs:string" minOccurs="0"/>
+<xs:element name="imageType" type="xs:string" minOccurs="0"/>
+<xs:element name="phonenumber" type="xs:string" minOccurs="0"/>
+<xs:element name="postalcode" type="xs:string" minOccurs="0"/>
+<xs:element name="productDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="productId" type="xs:int"/>
+<xs:element name="productName" type="xs:string" minOccurs="0"/>
+<xs:element name="productPhotourl" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="productPrice" type="xs:string" minOccurs="0"/>
+<xs:element name="purchaseId" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:int"/>
+<xs:element name="sellerId" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPhoto">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPhotoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addProduct">
+<xs:sequence>
+<xs:element name="productname" type="xs:string" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="price" type="xs:string" minOccurs="0"/>
+<xs:element name="imageblob" type="xs:string" minOccurs="0"/>
+<xs:element name="userid" type="xs:int"/>
+<xs:element name="image_type" type="xs:string" minOccurs="0"/>
+<xs:element name="image_name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductSales">
+<xs:sequence>
+<xs:element name="userid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductSalesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:purchase" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLikeStatus">
+<xs:sequence>
+<xs:element name="productid" type="xs:int"/>
+<xs:element name="userid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLikeStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLike">
+<xs:sequence>
+<xs:element name="productid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLikeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editProduct">
+<xs:sequence>
+<xs:element name="productName" type="xs:string" minOccurs="0"/>
+<xs:element name="productPrice" type="xs:string" minOccurs="0"/>
+<xs:element name="productDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="product_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductPurchase">
+<xs:sequence>
+<xs:element name="userid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductPurchaseResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:purchase" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotalPurchase">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotalPurchaseResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllProduct">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllProductResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProduct">
+<xs:sequence>
+<xs:element name="product_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProductResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getYourProduct">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getYourProductResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
