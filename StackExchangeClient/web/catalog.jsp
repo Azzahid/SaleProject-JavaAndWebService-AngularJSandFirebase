@@ -206,23 +206,27 @@
           <div class="mdl-card__supporting-text mdl-color-text--grey-600">
             <!--<h3>Messages</h3>-->
             <div id="messages"></div>
-            <h3>Online Users</h3>
             <div id="onlineUsers"></div>
             <div ng-app="clientApp" ng-controller="clientController">
-                <ul style="position:fixed; right:0;bottom:0">
+                <div style="position:fixed; right:0;bottom:0;">
+                    User Online<br>
+                    <button><a href="catalog.jsp">Refresh Chat</a></button>
+                <ul style="position:relative; right:0;bottom:0">
                 <li ng-repeat="x in onlineUsers">
-                    <div style="border-style: solid; border-width:1px; width:25 0px; height:{{x.show ? '300px' : '30px'}};position:relative;right:0;bottom:0;">
+                    <div style="border-style: solid; border-width:1px; width:250px; height:{{x.show ? '300px' : '30px'}};position:relative;right:0;bottom:0; ">
                         <button ng-click="toggleShow(x);" style="width:250px;">{{x.username}}</button>
                         <div ng-show="x.show">
                             <form>
-                                <div id="box-{{x.username}}" style="border-style:solid; height:240px;overflow:scroll;"></div>
+                                <div id="box-{{x.username}}" style="border-style:solid; height:240px;overflow-y:scroll;background-color:white;"></div>
                                 <input ng-model="x.message" id="message-{{x.username}}">
                                 <button ng-click="sendChat(x.token, x.message, x.username)">send</button>
                             </form>
                         </div>
                     </div>
                 </li>
+              
               </ul>
+                </div>
             </div>
           </div>
         </div>
@@ -282,15 +286,24 @@
                 
                 $scope.updateOnlineUsers = function() {
                     console.log('updating online users');
-                    $.getJSON('http://localhost:8083/chat-server.php?callback=?',{
-                        code: "checkingOnlineUsers",
-                        token: cToken,
-                      },function(res){
-                          console.log("response: "+res.data);
+                    
+                    $http.get("http://localhost:8083/chat-server.php?code=checkingOnlineUsers&callback=?&username="+cUsername)
+                    .then(function (response) {
+                        console.log("response: "+response.data);
                           $scope.$apply(function(){
-                            $scope.onlineUsers = res.data;
+                            $scope.onlineUsers = response.data;
                           });
                     });
+//                    $.getJSON('http://localhost:8083/chat-server.php?callback=?',{
+//                        code: "checkingOnlineUsers",
+//                        token: cToken,
+//                        username: cUsername,
+//                      },function(res){
+//                          console.log("response: "+res.data);
+//                          $scope.$apply(function(){
+//                            $scope.onlineUsers = res.data;
+//                          });
+//                    });
                 }
             });
         </script>
