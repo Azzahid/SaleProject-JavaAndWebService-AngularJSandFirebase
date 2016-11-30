@@ -16,6 +16,12 @@
         <link rel="stylesheet" type ="text/css" href="css/style.css">
         <link rel="stylesheet" type ="text/css" href="css/header.css">
         <link rel="stylesheet" type ="text/css" href="css/products.css">
+        
+        <!--Manifest-->
+        <link rel="manifest" href="manifest.json">
+        
+        <!--AngularJS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
     <body class="body-center helvetica">
         <jsp:include page="header.jsp" />
@@ -47,6 +53,7 @@
 <%
     Timestamp now = new Timestamp(System.currentTimeMillis());
     int user_id = 0;
+     String username = "";
     if(session.getAttribute("expire") == null) {
         response.sendRedirect("login.jsp");
     }
@@ -92,7 +99,7 @@
 
                 String error = "";
                 user_id = 0;
-                String username = "";
+                //String username = "";
                 String consignee = "";
                 String address = "";
                 String postalcode = "";
@@ -189,14 +196,97 @@
                 }else{
                     out.print("Product Not Found");
                 }
+                username = (String)session.getAttribute("username");
             } catch (Exception ex) {
                 out.println("Result = "+ex);
             }
         }
     }
 %>
-
+        <h1>Client Server</h1>
+        <input type="hidden" value="<%out.print(username);%>" id="username">
+        <div></div>
+        <!-- Container for the Table of content -->
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <h3>Messages</h3>
+            <div id="messages"></div>
+            <h3>Online Users</h3>
+            <div id="onlineUsers"></div>
+            <div ng-app="clientApp" ng-controller="clientController">
+                <ul>
+                <li ng-repeat="x in onlineUsers">
+                    <input type="checkbox" ng-model="x.show">
+                    {{ x.show+ x.username + '('+x.token+')' }}
+                    <div ng-show="x.show">
+                        <form>
+                            <div id="box-{{x.username}}"></div>
+                            <input ng-model="x.message" id="message-{{x.username}}">
+                            <button ng-click="sendChat(x.token, x.message, x.username)">send</button>
+                        </form>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         </div>
         <script type="text/javascript" src="js/catalog.js"></script>
+        <!--Scripts-->
+        <!--Jquery-->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+        <!-- Firebase -->
+        <!-- ********************************************************
+             * TODO(DEVELOPER): Update Firebase initialization code:
+                1. Go to the Firebase console: https://console.firebase.google.com/
+                2. Choose a Firebase project you've created
+                3. Click "Add Firebase to your web app"
+                4. Replace the following initialization code with the code from the Firebase console:
+        -->
+        <!-- START INITIALIZATION CODE -->
+        <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+       
+        
+        <script>
+            var app = angular.module("clientApp", []);
+            app.controller("clientController", function($scope, $http) {
+                var cUsername = $('#username').attr('value');
+                console.log('checking online users');                
+                $http.get("http://localhost:8083/chat-server.php?code=checkingOnlineUsers&callback=?&username="+cUsername)
+                    .then(function (response) {
+                        $scope.onlineUsers = response.data;
+                    });
+                
+                $scope.sendChat = function(token, message, username) {
+                    $('#box-'+username).append("You: "+message);
+                    $('#message-'+username).val("");
+                    console.log('sending message...');
+                    $.getJSON('http://localhost:8083/chat-server.php?callback=?',{
+                        code: "sendChat",
+                        to: token,
+                        message: message,
+                        senderUsername: $('#username').attr('value'),
+                      },function(res){
+                          alert('Response: '+res.response);
+                    });
+                };
+                
+                $scope.updateOnlineUsers = function() {
+                    console.log('updating online users');
+                    $.getJSON('http://localhost:8083/chat-server.php?callback=?',{
+                        code: "checkingOnlineUsers",
+                        token: cToken,
+                      },function(res){
+                          console.log("response: "+res.data);
+                          $scope.$apply(function(){
+                            $scope.onlineUsers = res.data;
+                          });
+                    });
+                }
+            });
+        </script>
+        <script type="text/javascript" src="chat.js"></script>
+        
     </body>
 </html>
