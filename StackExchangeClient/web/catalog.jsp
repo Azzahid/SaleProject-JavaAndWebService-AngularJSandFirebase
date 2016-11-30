@@ -200,27 +200,26 @@
         }
     }
 %>
-        <h1>Client Server</h1>
         <input type="hidden" value="<%out.print(username);%>" id="username">
-        <div></div>
         <!-- Container for the Table of content -->
         <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
           <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            <h3>Messages</h3>
+            <!--<h3>Messages</h3>-->
             <div id="messages"></div>
             <h3>Online Users</h3>
             <div id="onlineUsers"></div>
             <div ng-app="clientApp" ng-controller="clientController">
-                <ul>
+                <ul style="position:fixed; right:0;bottom:0">
                 <li ng-repeat="x in onlineUsers">
-                    <input type="checkbox" ng-model="x.show">
-                    {{ x.show+ x.username + '('+x.token+')' }}
-                    <div ng-show="x.show">
-                        <form>
-                            <div id="box-{{x.username}}"></div>
-                            <input ng-model="x.message" id="message-{{x.username}}">
-                            <button ng-click="sendChat(x.token, x.message, x.username)">send</button>
-                        </form>
+                    <div style="border-style: solid; border-width:1px; width:25 0px; height:{{x.show ? '300px' : '30px'}};position:relative;right:0;bottom:0;">
+                        <button ng-click="toggleShow(x);" style="width:250px;">{{x.username}}</button>
+                        <div ng-show="x.show">
+                            <form>
+                                <div id="box-{{x.username}}" style="border-style:solid; height:240px;overflow:scroll;"></div>
+                                <input ng-model="x.message" id="message-{{x.username}}">
+                                <button ng-click="sendChat(x.token, x.message, x.username)">send</button>
+                            </form>
+                        </div>
                     </div>
                 </li>
               </ul>
@@ -256,7 +255,10 @@
                     });
                 
                 $scope.sendChat = function(token, message, username) {
-                    $('#box-'+username).append("You: "+message);
+                    var dataElement2 = document.createElement('p');
+                    dataElement2.textContent = "You: "+message;
+                    dataElement2.style.cssText = "position:center"
+                    $("#box-"+username).append(dataElement2);
                     $('#message-'+username).val("");
                     console.log('sending message...');
                     $.getJSON('http://localhost:8083/chat-server.php?callback=?',{
@@ -267,6 +269,15 @@
                       },function(res){
                           alert('Response: '+res.response);
                     });
+                };
+                
+                $scope.toggleShow = function(x) {
+                    if(x.show) {
+                        x.show = false;
+                    }
+                    else {
+                        x.show = true;
+                    }
                 };
                 
                 $scope.updateOnlineUsers = function() {
