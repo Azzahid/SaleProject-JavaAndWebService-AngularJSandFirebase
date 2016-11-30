@@ -13,6 +13,7 @@
 <%  
     String user = request.getParameter("username");
     String pass = request.getParameter("password");
+    String agent = request.getHeader("User-Agent");
     String error = "";
     
     if(user != null && pass != null && !user.equals("") && !pass.equals("")){
@@ -25,7 +26,7 @@
         // Send POST output.
         connection.setRequestMethod("POST");
         java.io.DataOutputStream printout = new java.io.DataOutputStream(connection.getOutputStream ());
-        String content = "username=" + user + "&password=" + pass;
+        String content = "username=" + user + "&password=" + pass + "&userAgent=" + agent;
         printout.writeBytes (content);
         printout.flush (); 
         printout.close ();

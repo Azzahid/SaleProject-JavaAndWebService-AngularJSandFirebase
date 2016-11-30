@@ -28,6 +28,8 @@ import javax.servlet.RequestDispatcher;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public String userid;
+    public String agent = "";
+    public String userIP = "";
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +39,8 @@ public class LoginServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String token = "";
         String message = "";
+        agent = request.getParameter("userAgent").toString();
+        userIP = request.getRemoteAddr();
         /*if(user != null && pass != null && !user.equals("") && !pass.equals("")){
             try {
                 //creating connection with the database 
@@ -79,14 +83,14 @@ public class LoginServlet extends HttpServlet {
         }
         response.addHeader("token", token);
         response.addHeader("message",message);
-        response.addIntHeader("expiryTime", 3);
+        response.addIntHeader("expiryTime", 30);
         response.flushBuffer();
     }
     
     public String getToken(){
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
-        
+        token = token + '#' + agent + '#' + userIP;
         return token;
     }
     
