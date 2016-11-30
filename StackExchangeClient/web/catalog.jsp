@@ -19,7 +19,9 @@
         
         <!--Manifest-->
         <link rel="manifest" href="manifest.json">
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!--AngularJS-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
@@ -60,12 +62,7 @@
     else {
         Timestamp expire = (Timestamp)session.getAttribute("expire");
         if(expire.before(now)) {
-            session.setAttribute("userid", null);
-            session.setAttribute("username", null);
-            session.setAttribute("token", null);
-            session.setAttribute("expire", null);
-            session.invalidate();
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("logout.jsp");
         } 
         else {      
 

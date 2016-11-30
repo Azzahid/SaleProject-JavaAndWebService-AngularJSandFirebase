@@ -5,7 +5,25 @@
 --%>
 
 <%@page import="java.net.HttpURLConnection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.net.URL"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script type="text/javascript" src="chat.js"></script>
+    <script>
+        deleteToken();
+    </script>
+    <a href="login.jsp">Back to login...</a>
+    </body>
+</html>
+
 <%  
     String user = (String)session.getAttribute("username");
     String token = (String)session.getAttribute("token");
@@ -35,5 +53,6 @@
     session.setAttribute("token", null);
     session.setAttribute("expire", null);
     session.invalidate();
-    response.sendRedirect("login.jsp");
+    //Thread.sleep(5000); // sleep 5 seconds
+    //response.sendRedirect("login.jsp");
 %>
